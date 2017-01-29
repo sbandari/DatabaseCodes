@@ -1,0 +1,42 @@
+connect system/&password ; 
+
+drop user dbsec cascade;
+
+
+
+CREATE USER "DBSEC" PROFILE "DEFAULT" IDENTIFIED BY "Tec5363%1" account unlock ;
+
+ALTER USER "DBSEC" DEFAULT TABLESPACE "USERS";
+
+ALTER USER "DBSEC" TEMPORARY TABLESPACE "TEMP";
+
+ALTER USER "DBSEC" PASSWORD EXPIRE;
+
+ALTER USER "DBSEC" PROFILE "DEFAULT";
+
+ALTER USER "DBSEC" quota 30 M ON "USERS";
+
+
+drop user VPD_CLERK1 cascade; 
+
+
+
+CREATE USER "VPD_CLERK1" PROFILE "DEFAULT" IDENTIFIED BY "Jessie#22" account unlock ;
+
+ALTER USER "VPD_CLERK1" DEFAULT TABLESPACE "USERS";
+
+ALTER USER "VPD_CLERK1" TEMPORARY TABLESPACE "TEMP";
+
+ALTER USER "VPD_CLERK1" PASSWORD EXPIRE;
+
+ALTER USER "VPD_CLERK1" PROFILE "DEFAULT";
+
+ALTER USER "VPD_CLERK1" quota 30 M ON "USERS";
+
+
+
+
+select username, password, account_status, lock_date,default_Tablespace, temporary_Tablespace, profile
+ from dba_users
+ where username in ('DBSEC', 'VPD_CLERK1'); 
+
